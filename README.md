@@ -1,6 +1,6 @@
 # active_package
 
-A new Flutter plugin project.
+Flutter plugin that helps you know the package name of any application running in foreground
 
 ## Getting Started
 
