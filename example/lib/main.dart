@@ -22,11 +22,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  Future<void> getPackageName() async {
     String packageName;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
@@ -54,11 +53,18 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-            child: Text(
-          'Running on: $_packageName\n',
-          textAlign: TextAlign.center,
-        )),
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextButton(
+                  onPressed: () => getPackageName(),
+                  child: const Text("Get package name")),
+              Text(
+                'Running on: $_packageName\n',
+                textAlign: TextAlign.center,
+              ),
+            ]),
       ),
     );
   }

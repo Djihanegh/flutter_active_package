@@ -20,11 +20,17 @@ import io.flutter.plugin.common.MethodChannel.Result;
 /**
  * ActivePackagePlugin
  */
-public class ActivePackagePlugin implements FlutterPlugin {
+public class ActivePackagePlugin implements FlutterPlugin, MethodCallHandler {
+
+    private static Context context;
+    private MethodChannel channel;
 
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "active_package");
+        channel.setMethodCallHandler(this);
+        context = flutterPluginBinding.getApplicationContext();
     }
 
 
@@ -52,7 +58,23 @@ public class ActivePackagePlugin implements FlutterPlugin {
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        channel.setMethodCallHandler(null);
     }
 
 
+    @Override
+    public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+        if (call.method.equals("getActivePackageName")) {
+
+            String packageName = getActivePackageName(context);
+
+            if (!packageName.isEmpty()) {
+                result.success(packageName);
+            } else {
+                result.error("UNAVAILABLE", "Couldn't get the active package name of the app running on foreground", null);
+            }
+        } else {
+            result.notImplemented();
+        }
+    }
 }
