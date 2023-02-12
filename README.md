@@ -15,17 +15,15 @@ Check the example folder for a complete working example about the plugin
 
 Future<void> getPackageName() async {
   String packageName;
-  // Platform messages may fail, so we use a try/catch PlatformException.
-  // We also handle the message potentially returning null.
   try {
     packageName = await _activePackagePlugin.getActivePackageName() ??
         'Unknown package name';
-  } on PlatformException {
+  } catch (e) {
     packageName = 'Failed to get the active package name.';
   }
 
-  // If the widget was removed from the tree while the asynchronous platform
-  // message was in flight, we want to discard the reply rather than calling
+  // If the widget was removed from the tree while the asynchronous package name
+  // method was in flight, we want to discard the reply rather than calling
   // setState to update our non-existent appearance.
   if (!mounted) return;
 
