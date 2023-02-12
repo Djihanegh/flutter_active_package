@@ -37,8 +37,7 @@ flutter:
       android:
         package: com.active_package.active_package
         pluginClass: ActivePackagePlugin
-      ios:
-        pluginClass: ActivePackagePlugin
+
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
