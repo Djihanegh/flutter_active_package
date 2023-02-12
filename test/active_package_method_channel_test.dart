@@ -10,7 +10,7 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      return 'com.active_package';
     });
   });
 
@@ -18,7 +18,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await platform.getActivePackageName(), '42');
+  test('getActivePackageName', () async {
+    expect(await platform.getActivePackageName(), 'com.active_package');
   });
 }

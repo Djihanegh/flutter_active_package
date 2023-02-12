@@ -56,10 +56,15 @@ class _MyAppState extends State<MyApp> {
               TextButton(
                   onPressed: () => getPackageName(),
                   child: const Text("Get package name")),
-              Text(
-                'Running on: $_packageName\n',
+              const Text(
+                'Running on:\n',
                 textAlign: TextAlign.center,
               ),
+              Text(
+                _packageName,
+                key: const Key("package_name_text_key"),
+                textAlign: TextAlign.center,
+              )
             ]),
       ),
     );
