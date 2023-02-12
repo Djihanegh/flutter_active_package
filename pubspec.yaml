@@ -1,7 +1,7 @@
 name: active_package
-description: A new Flutter plugin project.
+description: A Flutter plugin that helps you know the package name of any application running in foreground (Android only).
 version: 0.0.1
-homepage:
+homepage: https://github.com/Djihanegh/flutter_active_package.git
 
 environment:
   sdk: '>=2.18.2 <3.0.0'

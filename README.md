@@ -1,15 +1,37 @@
 # active_package
 
-Flutter plugin that helps you know the package name of any application running in foreground
+A Flutter plugin that helps you know the package name of any application running in foreground.
+
+## When it can be used
+
+- Know which app is opened in foreground while your app is running in background.
+- Get the package name of your main app.
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+Check the example folder for a complete working example about the plugin
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
 
+Future<void> getPackageName() async {
+  String packageName;
+  // Platform messages may fail, so we use a try/catch PlatformException.
+  // We also handle the message potentially returning null.
+  try {
+    packageName = await _activePackagePlugin.getActivePackageName() ??
+        'Unknown package name';
+  } on PlatformException {
+    packageName = 'Failed to get the active package name.';
+  }
+
+  // If the widget was removed from the tree while the asynchronous platform
+  // message was in flight, we want to discard the reply rather than calling
+  // setState to update our non-existent appearance.
+  if (!mounted) return;
+
+  setState(() {
+    _packageName = packageName;
+  });
+}
+
+```
