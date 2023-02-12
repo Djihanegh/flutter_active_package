@@ -8,7 +8,7 @@ class MockActivePackagePlatform
     with MockPlatformInterfaceMixin
     implements ActivePackagePlatform {
   @override
-  Future<String?> getActivePackageName() => Future.value('42');
+  Future<String?> getActivePackageName() => Future.value('com.active_package');
 }
 
 void main() {
@@ -23,6 +23,7 @@ void main() {
     MockActivePackagePlatform fakePlatform = MockActivePackagePlatform();
     ActivePackagePlatform.instance = fakePlatform;
 
-    expect(await activePackagePlugin.getActivePackageName(), '42');
+    expect(
+        await activePackagePlugin.getActivePackageName(), 'com.active_package');
   });
 }
